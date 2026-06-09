@@ -86,12 +86,12 @@ h1{font-size:22px;font-weight:600;margin-bottom:6px}
   <h1>&#x1F697; Korean Driving License</h1>
   <p class="sub">1,000&#xBB38;&#xC81C; &#xBB38;&#xC81C;&#xC740;&#xD589; &middot; Ng&acirc;n h&agrave;ng 1,000 c&acirc;u h&#7887;i<br>Choose your exam type / &#xC2DC;&#xD5D8; &#xC885;&#xB958;&#xB97C; &#xC120;&#xD0DD;&#xD558;&#xC138;&#xC694;</p>
   <div class="type-cards">
-    <div class="type-card" id="card-1" onclick="selectType(1)">
+    <div class="type-card" id="card-1">
       <div class="label">1&#xC885; &#xBCF4;&#xD1B5;</div>
       <div class="score">70&#xC810;</div>
       <div class="pass">&#xC774;&#xC0C1; &#xD569;&#xACA9;</div>
     </div>
-    <div class="type-card" id="card-2" onclick="selectType(2)">
+    <div class="type-card" id="card-2">
       <div class="label">2&#xC885; &#xBCF4;&#xD1B5;</div>
       <div class="score">60&#xC810;</div>
       <div class="pass">&#xC774;&#xC0C1; &#xD569;&#xACA9;</div>
@@ -102,7 +102,7 @@ h1{font-size:22px;font-weight:600;margin-bottom:6px}
     <div class="info-item"><div class="val">40&#xBD84;</div><div class="lbl">Time Limit</div></div>
     <div class="info-item"><div class="val">2.5&#xC810;</div><div class="lbl">Per Question</div></div>
   </div>
-  <button class="btn-main" id="btn-start" onclick="startExam()" disabled>Start Exam / &#xC2DC;&#xD5D8; &#xC2DC;&#xC791;</button>
+  <button class="btn-main" id="btn-start" disabled>Start Exam / &#xC2DC;&#xD5D8; &#xC2DC;&#xC791;</button>
 </div>
 </div>
 
@@ -122,9 +122,9 @@ h1{font-size:22px;font-weight:600;margin-bottom:6px}
   <div class="hint" id="hint" style="display:none"></div>
   <div class="opts" id="opts"></div>
   <div class="nav-row">
-    <button class="btn-sec" onclick="prevQ()">&#x25C4; Prev</button>
-    <button class="btn-sec" onclick="nextQ()">Next &#x25BA;</button>
-    <button class="btn-submit" onclick="confirmSubmit()">Submit / &#xC81C;&#xCD9C;</button>
+    <button class="btn-sec" id="btn-prev">&#x25C4; Prev</button>
+    <button class="btn-sec" id="btn-next">Next &#x25BA;</button>
+    <button class="btn-submit" id="btn-submit">Submit / &#xC81C;&#xCD9C;</button>
   </div>
 </div>
 
@@ -146,8 +146,8 @@ h1{font-size:22px;font-weight:600;margin-bottom:6px}
     <div id="wlist"></div>
   </div>
   <div class="result-actions">
-    <button class="btn-sec" style="flex:1" onclick="retryExam()">Retry / &#xB2E4;&#xC2DC; &#xD480;&#xAE30;</button>
-    <button class="btn-main" style="flex:1;width:auto" onclick="goHome()">Home / &#xCC98;&#xC74C;&#xC73C;&#xB85C;</button>
+    <button class="btn-sec" style="flex:1" id="btn-retry">Retry / &#xB2E4;&#xC2DC; &#xD480;&#xAE30;</button>
+    <button class="btn-main" style="flex:1;width:auto" id="btn-home">Home / &#xCC98;&#xC74C;&#xC73C;&#xB85C;</button>
   </div>
 </div>
 </div>
@@ -296,6 +296,19 @@ function submitExam(){
 
 function retryExam(){startExam();}
 function goHome(){clearInterval(timerID);showScreen('start');}
+
+// Bind all events after DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('card-1').addEventListener('click', function(){ selectType(1); });
+  document.getElementById('card-2').addEventListener('click', function(){ selectType(2); });
+  document.getElementById('btn-start').addEventListener('click', startExam);
+  document.getElementById('btn-prev').addEventListener('click', prevQ);
+  document.getElementById('btn-next').addEventListener('click', nextQ);
+  document.getElementById('btn-submit').addEventListener('click', confirmSubmit);
+  document.getElementById('btn-retry').addEventListener('click', retryExam);
+  document.getElementById('btn-home').addEventListener('click', goHome);
+});
+
 </script>
 </body>
 </html>
